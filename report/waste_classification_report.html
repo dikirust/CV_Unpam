@@ -1,0 +1,99 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Laporan CNN Klasifikasi Sampah</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; }
+        h1, h2 { color: #2c3e50; }
+        .metric { background-color: #f8f9fa; padding: 10px; margin: 10px 0; }
+        table { border-collapse: collapse; width: 100%; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        th { background-color: #f2f2f2; }
+        .summary { background-color: #e8f4f8; padding: 15px; border-radius: 5px; }
+    </style>
+</head>
+<body>
+    <h1>Laporan Proyek CNN untuk Klasifikasi Sampah Otomatis</h1>
+    
+    <h2>1. Pendahuluan</h2>
+    <div class="summary">
+        <h3>Latar Belakang</h3>
+        <p>Klasifikasi citra merupakan salah satu aplikasi computer vision yang penting dalam kehidupan sehari-hari. 
+        Convolutional Neural Network (CNN) telah terbukti sangat efektif untuk tugas klasifikasi gambar karena 
+        kemampuannya dalam mengenali pola spasial dan fitur visual.</p>
+        
+        <h3>Tujuan</h3>
+        <p>Membangun model CNN dari awal untuk mengklasifikasikan 5 jenis sampah (foodwaste, glass, metal, paper, plastic) 
+        untuk sistem pemisah sampah otomatis.</p>
+        
+        <h3>Dataset</h3>
+        <p>Dataset terdiri dari gambar sampah dengan 5 kategori: foodwaste, glass, metal, paper, dan plastic. 
+        Dataset dibagi menjadi training set (8400 gambar), validation set (469 gambar), 
+        dan test set (237 gambar).</p>
+    </div>
+    
+    <h2>2. Metodologi</h2>
+    <h3>Pra-Pemrosesan</h3>
+    <p>- Resize gambar ke ukuran 64x64 pixels untuk efisiensi komputasi</p>
+    <p>- Normalisasi pixel values ke range 0-1 dengan membagi nilai pixel dengan 255.0</p>
+    <p>- Konversi color space dari BGR ke RGB</p>
+    
+    <h3>Arsitektur Model</h3>
+    <p>Model CNN sederhana dengan konfigurasi ringan:</p>
+    <ul>
+        <li>3 Convolutional layers dengan filter 16, 32, 32</li>
+        <li>MaxPooling2D setelah setiap conv layer</li>
+        <li>Flatten layer</li>
+        <li>Dense layer dengan 32 units + Dropout 0.3</li>
+        <li>Output layer dengan 5 units (softmax activation)</li>
+    </ul>
+    <p>Total parameters: 80,069</p>
+    
+    <h3>Parameter Pelatihan</h3>
+    <div class="metric">
+        <p><strong>Optimizer:</strong> Adam (learning_rate=0.001)</p>
+        <p><strong>Loss Function:</strong> Sparse Categorical Crossentropy</p>
+        <p><strong>Batch Size:</strong> 16</p>
+        <p><strong>Epochs:</strong> 8</p>
+        <p><strong>Callbacks:</strong> EarlyStopping, ReduceLROnPlateau</p>
+    </div>
+    
+    <h2>3. Hasil dan Analisis</h2>
+    <h3>Metrik Performa</h3>
+    <div class="metric">
+        <p><strong>Test Accuracy:</strong> 0.6160</p>
+        <p><strong>Test Precision:</strong> 0.5898</p>
+        <p><strong>Test Recall:</strong> 0.6160</p>
+        <p><strong>Test F1-Score:</strong> 0.5807</p>
+    </div>
+    
+    <h3>Analisis Kinerja</h3>
+    <h4>Analisis Overfitting</h4>
+    <p>Berdasarkan training curves, model menunjukkan pelatihan yang baik. 
+    Training dan validation curves relatif seimbang.</p>
+    
+    <h4>Analisis Kesalahan</h4>
+    <p>Berdasarkan confusion matrix, kelas yang paling sering salah diklasifikasikan dapat dilihat dari 
+    nilai off-diagonal yang tinggi. Hal ini mungkin disebabkan oleh kesamaan visual antar kategori sampah 
+    tertentu dalam resolusi 64x64.</p>
+    
+    <h2>4. Kesimpulan</h2>
+    <div class="summary">
+        <h3>Temuan Utama</h3>
+        <p>Model CNN sederhana berhasil mencapai accuracy 61.60% pada test set. 
+        Model menunjukkan performa yang stabil.</p>
+        
+        <h3>Saran Perbaikan</h3>
+        <ol>
+            <li><strong>Data Augmentation:</strong> Menambahkan rotasi, flip, dan zoom untuk meningkatkan variasi data</li>
+            <li><strong>Regularization:</strong> Menambahkan dropout lebih banyak atau batch normalization untuk mengurangi overfitting</li>
+        </ol>
+    </div>
+    
+    <h2>5. Lampiran</h2>
+    <p>Source code tersedia dalam file: waste_classification_cnn.ipynb</p>
+    <p>Model tersimpan dalam: models/waste_classification_model.pkl</p>
+    
+</body>
+</html>
