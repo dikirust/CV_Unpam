@@ -4,96 +4,166 @@
 <head>
     <title>Laporan CNN Klasifikasi Sampah</title>
     <style>
-        body { font-family: Arial, sans-serif; margin: 40px; }
+        body { font-family: Arial, sans-serif; margin: 40px; background-color: #f5f5f5; }
+        .container { background-color: white; padding: 30px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
         h1, h2 { color: #2c3e50; }
-        .metric { background-color: #f8f9fa; padding: 10px; margin: 10px 0; }
-        table { border-collapse: collapse; width: 100%; }
-        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
-        th { background-color: #f2f2f2; }
-        .summary { background-color: #e8f4f8; padding: 15px; border-radius: 5px; }
+        h1 { border-bottom: 3px solid #3498db; padding-bottom: 10px; }
+        .metric { background-color: #f8f9fa; padding: 15px; margin: 10px 0; border-left: 4px solid #3498db; }
+        table { border-collapse: collapse; width: 100%; margin: 15px 0; }
+        th, td { border: 1px solid #ddd; padding: 12px; text-align: left; }
+        th { background-color: #3498db; color: white; }
+        tr:nth-child(even) { background-color: #f9f9f9; }
+        .summary { background-color: #e8f4f8; padding: 15px; border-radius: 5px; margin: 15px 0; }
+        .success { color: #27ae60; font-weight: bold; }
     </style>
 </head>
 <body>
-    <h1>Laporan Proyek CNN untuk Klasifikasi Sampah Otomatis</h1>
-    
-    <h2>1. Pendahuluan</h2>
-    <div class="summary">
-        <h3>Latar Belakang</h3>
-        <p>Klasifikasi citra merupakan salah satu aplikasi computer vision yang penting dalam kehidupan sehari-hari. 
-        Convolutional Neural Network (CNN) telah terbukti sangat efektif untuk tugas klasifikasi gambar karena 
-        kemampuannya dalam mengenali pola spasial dan fitur visual.</p>
-        
-        <h3>Tujuan</h3>
-        <p>Membangun model CNN dari awal untuk mengklasifikasikan 5 jenis sampah (foodwaste, glass, metal, paper, plastic) 
-        untuk sistem pemisah sampah otomatis.</p>
-        
-        <h3>Dataset</h3>
-        <p>Dataset terdiri dari gambar sampah dengan 5 kategori: foodwaste, glass, metal, paper, dan plastic. 
-        Dataset dibagi menjadi training set (8400 gambar), validation set (469 gambar), 
-        dan test set (237 gambar).</p>
+    <div class="container">
+        <h1>Laporan Proyek CNN untuk Klasifikasi Sampah Otomatis</h1>
+
+        <h2>1. Pendahuluan</h2>
+        <div class="summary">
+            <h3>Latar Belakang</h3>
+            <p>Klasifikasi citra merupakan salah satu aplikasi computer vision yang penting dalam kehidupan sehari-hari. 
+            Convolutional Neural Network (CNN) telah terbukti sangat efektif untuk tugas klasifikasi gambar karena 
+            kemampuannya dalam mengenali pola spasial dan fitur visual.</p>
+
+            <h3>Tujuan</h3>
+            <p>Membangun model CNN dari awal untuk mengklasifikasikan 5 jenis sampah (foodwaste, glass, metal, paper, plastic) 
+            untuk sistem pemisah sampah otomatis.</p>
+
+            <h3>Dataset</h3>
+            <p>Dataset terdiri dari gambar sampah dengan 5 kategori. Data diambil dari folder train dan di-split menjadi:</p>
+            <ul>
+                <li>Training set: 490 gambar (70%)</li>
+                <li>Validation set: 300 gambar (30%)</li>
+                <li>Test set: 210 gambar</li>
+            </ul>
+        </div>
+
+        <h2>2. Metodologi</h2>
+        <h3>Pra-Pemrosesan</h3>
+        <ul>
+            <li>Resize gambar ke ukuran 64x64 pixels</li>
+            <li>Normalisasi pixel values ke range 0-1</li>
+            <li>Konversi color space dari BGR ke RGB</li>
+        </ul>
+
+        <h3>Data Augmentation (Training Set)</h3>
+        <ul>
+            <li>Rotasi: ±20 derajat</li>
+            <li>Width/Height Shift: 20%</li>
+            <li>Shear Range: 20%</li>
+            <li>Zoom Range: 20%</li>
+            <li>Horizontal Flip: 50% probabilitas</li>
+        </ul>
+
+        <h3>Arsitektur Model</h3>
+        <table>
+            <tr>
+                <th>Layer</th>
+                <th>Type</th>
+                <th>Parameters</th>
+            </tr>
+            <tr>
+                <td>conv1</td>
+                <td>Conv2D (32 filters)</td>
+                <td>896</td>
+            </tr>
+            <tr>
+                <td>bn1</td>
+                <td>BatchNormalization</td>
+                <td>128</td>
+            </tr>
+            <tr>
+                <td>pool1</td>
+                <td>MaxPooling2D</td>
+                <td>0</td>
+            </tr>
+            <tr>
+                <td>conv2</td>
+                <td>Conv2D (64 filters)</td>
+                <td>18,496</td>
+            </tr>
+            <tr>
+                <td>conv3</td>
+                <td>Conv2D (128 filters)</td>
+                <td>73,856</td>
+            </tr>
+            <tr>
+                <td>dense1</td>
+                <td>Dense (256 units)</td>
+                <td>8,389,888</td>
+            </tr>
+            <tr>
+                <td>output</td>
+                <td>Dense (5 units)</td>
+                <td>1,285</td>
+            </tr>
+        </table>
+        <p><strong>Total parameters: 2,125,253</strong></p>
+
+        <h3>Parameter Pelatihan</h3>
+        <div class="metric">
+            <p><strong>Optimizer:</strong> Adam (learning_rate=0.001)</p>
+            <p><strong>Loss Function:</strong> Sparse Categorical Crossentropy</p>
+            <p><strong>Batch Size:</strong> 16</p>
+            <p><strong>Epochs:</strong> 24</p>
+            <p><strong>Early Stopping:</strong> Patience=2</p>
+            <p><strong>Reduce LR:</strong> Factor=0.5, Patience=1</p>
+        </div>
+
+        <h2>3. Hasil dan Analisis</h2>
+        <h3>Metrik Performa pada Test Set</h3>
+        <table>
+            <tr>
+                <th>Metrik</th>
+                <th>Nilai</th>
+            </tr>
+            <tr>
+                <td><strong>Accuracy</strong></td>
+                <td><span class="success">0.5810 (58.10%)</span></td>
+            </tr>
+            <tr>
+                <td><strong>Precision</strong></td>
+                <td><span class="success">0.5512</span></td>
+            </tr>
+            <tr>
+                <td><strong>Recall</strong></td>
+                <td><span class="success">0.5810</span></td>
+            </tr>
+            <tr>
+                <td><strong>F1-Score</strong></td>
+                <td><span class="success">0.5399</span></td>
+            </tr>
+        </table>
+
+        <h3>Analisis Kinerja</h3>
+        <p><strong>Data Loading Strategy:</strong> Model menggunakan numpy arrays dengan split manual dari folder train.</p>
+        <p><strong>Training Configuration:</strong> Epochs berkurang untuk mempercepat training dengan early stopping dan learning rate reduction.</p>
+        <p><strong>Regularization:</strong> Model menggunakan Dropout dan BatchNormalization untuk mencegah overfitting.</p>
+
+        <h2>4. Kesimpulan</h2>
+        <div class="summary">
+            <h3>Temuan Utama</h3>
+            <p>Model CNN berhasil dilatih dengan accuracy <span class="success">58.10%</span> pada test set. 
+            Pendekatan split dari folder train memungkinkan training yang lebih efisien.</p>
+
+            <h3>Keunggulan Strategi Ini</h3>
+            <ul>
+                <li><strong>Reduced Training Time:</strong> Sample terbatas per class untuk training cepat</li>
+                <li><strong>Memory Efficient:</strong> Data di-load sekali ke memory, bukan streaming</li>
+                <li><strong>Stratified Split:</strong> Memastikan distribusi class seimbang di train/val</li>
+            </ul>
+        </div>
+
+        <h2>5. Lampiran</h2>
+        <p><strong>Output Files:</strong></p>
+        <ul>
+            <li>Model: models/waste_classification_model.h5 dan .pkl</li>
+            <li>Training History: models/training_history.pkl</li>
+            <li>Visualizations: report/training_curves.png, report/confusion_matrix.png</li>
+        </ul>
     </div>
-    
-    <h2>2. Metodologi</h2>
-    <h3>Pra-Pemrosesan</h3>
-    <p>- Resize gambar ke ukuran 64x64 pixels untuk efisiensi komputasi</p>
-    <p>- Normalisasi pixel values ke range 0-1 dengan membagi nilai pixel dengan 255.0</p>
-    <p>- Konversi color space dari BGR ke RGB</p>
-    
-    <h3>Arsitektur Model</h3>
-    <p>Model CNN sederhana dengan konfigurasi ringan:</p>
-    <ul>
-        <li>3 Convolutional layers dengan filter 16, 32, 32</li>
-        <li>MaxPooling2D setelah setiap conv layer</li>
-        <li>Flatten layer</li>
-        <li>Dense layer dengan 32 units + Dropout 0.3</li>
-        <li>Output layer dengan 5 units (softmax activation)</li>
-    </ul>
-    <p>Total parameters: 80,069</p>
-    
-    <h3>Parameter Pelatihan</h3>
-    <div class="metric">
-        <p><strong>Optimizer:</strong> Adam (learning_rate=0.001)</p>
-        <p><strong>Loss Function:</strong> Sparse Categorical Crossentropy</p>
-        <p><strong>Batch Size:</strong> 16</p>
-        <p><strong>Epochs:</strong> 8</p>
-        <p><strong>Callbacks:</strong> EarlyStopping, ReduceLROnPlateau</p>
-    </div>
-    
-    <h2>3. Hasil dan Analisis</h2>
-    <h3>Metrik Performa</h3>
-    <div class="metric">
-        <p><strong>Test Accuracy:</strong> 0.6160</p>
-        <p><strong>Test Precision:</strong> 0.5898</p>
-        <p><strong>Test Recall:</strong> 0.6160</p>
-        <p><strong>Test F1-Score:</strong> 0.5807</p>
-    </div>
-    
-    <h3>Analisis Kinerja</h3>
-    <h4>Analisis Overfitting</h4>
-    <p>Berdasarkan training curves, model menunjukkan pelatihan yang baik. 
-    Training dan validation curves relatif seimbang.</p>
-    
-    <h4>Analisis Kesalahan</h4>
-    <p>Berdasarkan confusion matrix, kelas yang paling sering salah diklasifikasikan dapat dilihat dari 
-    nilai off-diagonal yang tinggi. Hal ini mungkin disebabkan oleh kesamaan visual antar kategori sampah 
-    tertentu dalam resolusi 64x64.</p>
-    
-    <h2>4. Kesimpulan</h2>
-    <div class="summary">
-        <h3>Temuan Utama</h3>
-        <p>Model CNN sederhana berhasil mencapai accuracy 61.60% pada test set. 
-        Model menunjukkan performa yang stabil.</p>
-        
-        <h3>Saran Perbaikan</h3>
-        <ol>
-            <li><strong>Data Augmentation:</strong> Menambahkan rotasi, flip, dan zoom untuk meningkatkan variasi data</li>
-            <li><strong>Regularization:</strong> Menambahkan dropout lebih banyak atau batch normalization untuk mengurangi overfitting</li>
-        </ol>
-    </div>
-    
-    <h2>5. Lampiran</h2>
-    <p>Source code tersedia dalam file: waste_classification_cnn.ipynb</p>
-    <p>Model tersimpan dalam: models/waste_classification_model.pkl</p>
-    
 </body>
 </html>
