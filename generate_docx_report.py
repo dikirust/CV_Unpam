@@ -473,19 +473,24 @@ def create_docx_report(metrics_data):
     return doc
 
 
-def generate_report():
+def generate_report(metrics_data=None):
     """Generate laporan DOCX komprehensif"""
+    
+    if metrics_data is None:
+        metrics_data = {
+            'accuracy': 0.8786,
+            'precision': 0.8799,
+            'recall': 0.8786,
+            'f1_score': 0.8784,
+            'training_accuracy': 0.9791,
+            'training_loss': 0.0705,
+            'validation_loss': 0.4541,
+            'epochs_trained': 53
+        }
     
     print("\n" + "="*70)
     print("  MEMBUAT LAPORAN DOCX KOMPREHENSIF CNN KLASIFIKASI SAMPAH")
     print("="*70 + "\n")
-    
-    metrics_data = {
-        'accuracy': 0.6160,
-        'precision': 0.5898,
-        'recall': 0.6160,
-        'f1_score': 0.5807
-    }
     
     print("📊 Metrics loaded:")
     print(f"   - Accuracy: {metrics_data['accuracy']:.4f}")
