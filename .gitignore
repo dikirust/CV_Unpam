@@ -1,2 +1,60 @@
-# Ignore the entire datasets folder
+# Report and lecture related files
+report/
+*.html
+*.docx
+*.pdf
+
+# Datasets
 /datasets/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+pip-wheel-metadata/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual environments
+venv/
+ENV/
+env/
+.venv
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Jupyter Notebook
+.ipynb_checkpoints/
+*.ipynb_checkpoints
+
+# Large model files
+*.h5
+*.pkl
+*.pth
+*.pt
+
+# OS
+Thumbs.db
+.DS_Store
