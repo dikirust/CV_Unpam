@@ -58,3 +58,8 @@ env/
 # OS
 Thumbs.db
 .DS_Store
+
+generate_docx_report.py
+generate_docx_report_v2.py
+waste_classification_report.html
+report.ipynb
