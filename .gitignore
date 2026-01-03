@@ -4,6 +4,10 @@ report/
 *.docx
 *.pdf
 
+# Script dan instruction files
+generate_report_clean.py
+.github/
+
 # Datasets
 /datasets/
 
