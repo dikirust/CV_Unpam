@@ -1,0 +1,358 @@
+================================================================================
+WASTE CLASSIFICATION - ARCHITECTURE COMPARISON PROJECT
+SUMMARY OF CREATED SOLUTION
+================================================================================
+
+PROJECT OVERVIEW
+================================================================================
+Objective: Compare two CNN architectures for automatic waste classification
+Dataset: 5 classes (foodwaste, glass, metal, paper, plastic)
+Languages: Indonesian (report) + English (code, technical)
+Authors: Diki Rustian, Universitas Pamulang, Indonesia
+
+COMPARISON ARCHITECTURES
+================================================================================
+
+ARCHITECTURE 1: CUSTOM CNN
+---------------------------
+Type: Custom built from scratch
+Complexity: Medium
+Parameters: ~310K
+Training Time: 5-10 minutes
+Use Case: Educational, flexible customization
+
+Layers:
+  - Conv2D(32, 3x3) + BatchNorm + MaxPool + Dropout
+  - Conv2D(64, 3x3) + BatchNorm + MaxPool + Dropout
+  - Conv2D(128, 3x3) + BatchNorm + MaxPool + Dropout
+  - GlobalAveragePooling
+  - Dense(256, 128) + BatchNorm + Dropout
+  - Output Dense(5, softmax)
+
+Expected Accuracy: 75-90%
+
+
+ARCHITECTURE 2: MOBILENETV2 (LIGHTWEIGHT)
+------------------------------------------
+Type: Transfer Learning from ImageNet
+Complexity: Advanced
+Parameters: ~2.5M (but efficient with depthwise separable)
+Training Time: 3-7 minutes
+Use Case: Production, mobile deployment
+
+Features:
+  - Pretrained weights from ImageNet
+  - Frozen base model for transfer learning
+  - Depthwise separable convolutions
+  - Very efficient inference
+
+Expected Accuracy: 80-95%
+
+
+FILES GENERATED
+================================================================================
+
+MAIN EXECUTABLE:
+  ✓ waste_classification_main.py (714 lines)
+    Complete training, evaluation, and visualization pipeline
+    Run this first to generate all outputs
+
+DOCUMENTATION:
+  ✓ QUICK_START.txt - Quick reference to run everything
+  ✓ DOKUMENTASI.txt - Comprehensive project documentation
+  ✓ EXECUTION_FLOW.txt - Detailed step-by-step execution diagram
+  ✓ SCRIPT_SUMMARY.txt - Summary of what script does
+  ✓ PROJECT_OVERVIEW.txt - This file
+
+
+EXPECTED OUTPUTS (After running waste_classification_main.py)
+================================================================================
+
+FOLDER: output/models/
+  - custom_cnn.h5 (trained model 1)
+  - mobilenetv2.h5 (trained model 2)
+
+FOLDER: output/report/ (8 visualization PNG files)
+  1. 01_custom_cnn_training.png - Custom CNN training curves
+  2. 02_mobilenetv2_training.png - MobileNetV2 training curves
+  3. 03_training_comparison.png - Side-by-side training comparison
+  4. 04_cm_custom_cnn.png - Confusion matrix Custom CNN
+  5. 05_cm_mobilenetv2.png - Confusion matrix MobileNetV2
+  6. 06_metrics_comparison.png - Accuracy/Precision/Recall/F1 comparison
+  7. 07_per_class_accuracy.png - Per-class accuracy bars
+  8. 08_summary_comparison.png - 4-metric summary dashboard
+
+FOLDER: output/ (Data & Results)
+  - split_info.json - Dataset split information
+  - models_info.json - Architecture details
+  - training_info.json - Training metrics per epoch
+  - evaluation_results.json - Final test metrics
+  - history_custom_cnn.pkl - Training history pickle
+  - history_mobilenetv2.pkl - Training history pickle
+
+
+STEP-BY-STEP EXECUTION
+================================================================================
+
+STEP 1: LOAD DATA
+  Input: datasets/train/ (5 subdirectories)
+  Output: Split into train/val/test sets
+  
+STEP 2: BUILD CUSTOM CNN
+  Architecture: 3 conv blocks with 32->64->128 filters
+  
+STEP 3: BUILD MOBILENETV2
+  Architecture: Transfer learning from ImageNet
+  
+STEP 4: TRAIN CUSTOM CNN
+  Epochs: up to 50 (with early stopping)
+  
+STEP 5: TRAIN MOBILENETV2
+  Epochs: up to 50 (with early stopping)
+  
+STEP 6: VISUALIZE TRAINING
+  Generate 3 PNG files showing training curves
+  
+STEP 7: EVALUATE CUSTOM CNN
+  Metrics: Accuracy, Precision, Recall, F1-Score
+  
+STEP 8: EVALUATE MOBILENETV2
+  Metrics: Accuracy, Precision, Recall, F1-Score
+  
+STEP 9: VISUALIZE EVALUATION
+  Generate 5 PNG files showing results
+  
+STEP 10: SUMMARY COMPARISON
+  Generate 1 PNG file with summary metrics
+  
+STEP 11: SAVE ALL
+  Save models, data, and evaluation results
+
+
+EVALUATION METRICS INCLUDED
+================================================================================
+
+Per-Model:
+  ✓ Overall Accuracy
+  ✓ Precision (weighted average)
+  ✓ Recall (weighted average)
+  ✓ F1-Score (weighted average)
+  ✓ Confusion Matrix
+  ✓ Per-class Accuracy
+  ✓ Classification Report
+  ✓ Training Time
+  ✓ Parameter Count
+
+Comparison:
+  ✓ Accuracy comparison (bar chart)
+  ✓ Precision comparison
+  ✓ Recall comparison
+  ✓ F1-Score comparison
+  ✓ Per-class accuracy comparison (bar chart)
+  ✓ Model parameters comparison
+  ✓ Training time comparison
+  ✓ Summary dashboard (4 metrics)
+
+
+CONFIGURATION PARAMETERS
+================================================================================
+
+Data:
+  - Image Size: 64x64 pixels
+  - Color Space: RGB
+  - Normalization: 0-1 (pixel value / 255)
+  - Batch Size: 16
+  - Epochs: 50 (with early stopping)
+  
+Training:
+  - Optimizer: Adam (learning_rate=0.001)
+  - Loss: Sparse Categorical Crossentropy
+  - Metrics: Accuracy
+  - EarlyStopping: patience=10
+  - ReduceLROnPlateau: factor=0.5, patience=5
+  
+Split:
+  - Training: 70%
+  - Validation: 15%
+  - Test: 15%
+
+
+HOW TO RUN
+================================================================================
+
+Step 1: Verify dataset exists
+  Dataset structure:
+    datasets/
+    └── train/
+        ├── foodwaste/ (images here)
+        ├── glass/
+        ├── metal/
+        ├── paper/
+        └── plastic/
+
+Step 2: Install requirements
+  pip install -r requirements.txt
+
+Step 3: Run main script
+  python waste_classification_main.py
+  
+  Estimated time: 15-30 minutes depending on dataset size
+  
+Step 4: Check outputs
+  - Look in output/report/ for PNG files
+  - Check output/evaluation_results.json for metrics
+  
+Step 5: Next phase (separate script)
+  python generate_report.py
+  (generates HTML and DOCX report)
+
+
+EXPECTED RESULTS
+================================================================================
+
+Custom CNN Performance:
+  - Accuracy: 75-90%
+  - Parameters: ~310K
+  - Training Time: 5-10 minutes
+  - Confusion Matrix: Will show per-class predictions
+
+MobileNetV2 Performance:
+  - Accuracy: 80-95% (typically better)
+  - Parameters: ~2.5M (but efficient)
+  - Training Time: 3-7 minutes
+  - Confusion Matrix: Will show per-class predictions
+
+Comparison Summary:
+  - MobileNetV2 usually wins on accuracy (transfer learning)
+  - Custom CNN faster to train on small datasets
+  - MobileNetV2 better for production/mobile
+  - Both sufficient for this classification task
+
+
+KEY FEATURES
+================================================================================
+
+✓ Two different architectures for comparison
+✓ Comprehensive evaluation metrics
+✓ Professional visualizations (8 PNG files)
+✓ Reproducible results (fixed random seed)
+✓ Relative paths (portable)
+✓ Organized output structure
+✓ JSON export of results
+✓ Saved models for future use
+✓ Early stopping to prevent overfitting
+✓ Learning rate scheduling
+✓ Data augmentation capability
+✓ Per-class performance analysis
+
+
+REQUIREMENTS
+================================================================================
+
+Python 3.8+
+tensorflow >= 2.10
+keras >= 2.10
+numpy
+scipy
+matplotlib
+seaborn
+scikit-learn
+opencv-python
+pandas
+python-docx (for report generation)
+
+(All listed in requirements.txt)
+
+
+NOTES & TIPS
+================================================================================
+
+1. Script uses relative paths - can run from any directory
+2. All outputs go to 'output/' folder - easy to find
+3. Images are high resolution (300 DPI) - suitable for reports
+4. Models saved as .h5 files - can be loaded for inference
+5. JSON files human-readable - can open in text editor
+6. Early stopping prevents overfitting - training stops automatically
+7. Learning rate scheduling for better convergence
+8. Data split is consistent (fixed random seed)
+
+
+TROUBLESHOOTING
+================================================================================
+
+If dataset not found:
+  - Check datasets/train/ folder exists
+  - Verify 5 subdirectories (one per class)
+  - Check image file format (.jpg)
+
+If memory error:
+  - Reduce IMG_SIZE to 48 or 32
+  - Reduce BATCH_SIZE to 8
+  - Limit number of samples
+
+If training slow:
+  - Reduce EPOCHS value
+  - Use smaller image size
+  - Reduce dataset size
+
+If GPU not detected:
+  - Still works on CPU (slower)
+  - Check TensorFlow GPU installation if needed
+
+
+NEXT STEPS
+================================================================================
+
+After Phase 1 (this script):
+  1. Review PNG files in output/report/
+  2. Check metrics in output/evaluation_results.json
+  3. Verify models in output/models/
+  
+For Phase 2 (separate script):
+  1. Run generate_report.py
+  2. Review output/report.html
+  3. Check output/report.docx
+  4. Upload report.docx to Mentari
+
+
+PROJECT INFORMATION
+================================================================================
+
+Title: Waste Classification using Deep Learning
+Subtitle: Comparison of CNN Architectures
+
+Author: Diki Rustian
+Email: diki.rstn@gmail.com
+Institution: Universitas Pamulang, Indonesia
+
+Course: UAS ACV S2
+Date: Januari 2026
+
+Research Problem:
+  Automatic waste classification is important for waste management systems.
+  This project compares two different CNN architectures to determine which
+  provides better performance for this application.
+
+Research Question:
+  Which architecture (Custom CNN vs MobileNetV2) performs better for
+  automatic waste classification?
+
+Solution Proposed:
+  Use transfer learning with MobileNetV2 and compare with custom CNN
+
+Metrics for Comparison:
+  - Accuracy, Precision, Recall, F1-Score
+  - Training time and model size
+  - Per-class performance
+  - Confusion matrix analysis
+
+
+================================================================================
+END OF PROJECT OVERVIEW
+================================================================================
+
+Created: January 2026
+Status: Ready to execute
+Next: Run waste_classification_main.py
+
+For questions or issues, contact: diki.rstn@gmail.com

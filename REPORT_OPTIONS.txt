@@ -1,0 +1,346 @@
+================================================================================
+AVAILABLE REPORT FORMATS - COMPLETE SUBMISSION GUIDE
+================================================================================
+
+PROJECT: Waste Classification Using Deep Learning (CNN Comparison)
+STATUS: Two professional formats generated - Choose based on requirements
+DATE GENERATED: 3 January 2026
+
+================================================================================
+OPTION 1: SIMPLE ACADEMIC REPORT (for course submission)
+================================================================================
+
+FILE: output/report.docx
+SIZE: 360.5 KB
+FORMAT: Microsoft Word 2007+
+LANGUAGE: Mixed (Indonesian + English technical terms)
+CREATED BY: generate_report.py
+
+STRUCTURE:
+├── Title Page
+│   ├── Title, Author, Affiliation, Email
+│   ├── Date, License information
+│   └── Professional formatting
+│
+├── Content Sections
+│   ├── Abstrak (Indonesian)
+│   ├── Pendahuluan (Introduction)
+│   ├── Metodologi (Methodology)
+│   ├── Hasil dan Diskusi (Results & Discussion)
+│   ├── Kesimpulan (Conclusion)
+│   └── Daftar Pustaka (References)
+│
+├── Embedded Content
+│   ├── 3 PNG visualizations (metrics, confusion matrix, per-class accuracy)
+│   ├── 3 comparison tables
+│   └── 5 academic references
+│
+└── Metadata
+    ├── Single-spaced text
+    ├── Professional journal-style tables
+    └── All images embedded
+
+USE CASE: ✓ Universitas Pamulang UAS submission
+          ✓ Course evaluation
+          ✓ Quick academic report
+          ✓ Mentari platform upload
+
+ADVANTAGES:
+  • Smaller file size (easily uploadable)
+  • Clean, simple structure
+  • Indonesian focus
+  • Quick generation time
+  • Standard academic format
+
+================================================================================
+OPTION 2: COMPREHENSIVE JOURNAL ARTICLE (professional publication)
+================================================================================
+
+FILE: output/journal_report_complete.docx
+SIZE: 367.9 KB
+FORMAT: Microsoft Word 2007+ (JUTIF-style formatting)
+LANGUAGE: English (primary) with Indonesian sections
+CREATED BY: generate_report_jutif.py
+
+STRUCTURE:
+├── Title Page (Professional Journal Format)
+│   ├── English title
+│   ├── Author with superscript marker
+│   ├── Affiliation
+│   ├── Email
+│   ├── Publication dates (Submitted/Revised/Accepted/Published)
+│   └── Creative Commons License notice
+│
+├── Abstract Section (Bilingual)
+│   ├── English Abstract (comprehensive)
+│   ├── Indonesian Abstract (Abstrak)
+│   ├── 8 Keywords
+│   └── Professional formatting
+│
+├── Main Content (5 Sections)
+│   ├── I. INTRODUCTION (5 comprehensive paragraphs)
+│   │   ├── Global waste management context
+│   │   ├── Computer vision and ML background
+│   │   ├── Literature review (9+ citations)
+│   │   ├── MobileNetV2 and transfer learning
+│   │   └── Research objectives
+│   │
+│   ├── II. RESEARCH METHODOLOGY (A-D subsections)
+│   │   ├── A. Dataset Description and Preprocessing
+│   │   ├── B. Model Architectures (Custom CNN + MobileNetV2)
+│   │   ├── C. Training Configuration & Hyperparameters
+│   │   └── D. Evaluation Metrics and Analysis
+│   │
+│   ├── III. EXPERIMENTAL RESULTS
+│   │   ├── Table 1: Performance Metrics Comparison
+│   │   ├── Table 2: Per-Class Accuracy Analysis
+│   │   ├── Figure 1: Metrics Comparison Chart
+│   │   ├── Figure 2: Confusion Matrix Heatmaps
+│   │   ├── Figure 3: Per-Class Accuracy Chart
+│   │   └── All with detailed captions and discussions
+│   │
+│   ├── IV. DISCUSSION (5 subsections)
+│   │   ├── A. Transfer Learning Effectiveness
+│   │   ├── B. Model Architecture Implications
+│   │   ├── C. Practical Deployment Considerations
+│   │   ├── D. Feature Analysis and Interpretability
+│   │   └── E. Comparative Analysis with Related Work
+│   │
+│   └── V. CONCLUSION
+│       ├── Summary of findings
+│       ├── Practical implications
+│       ├── Comparative analysis
+│       └── Future research directions
+│
+├── Additional Sections
+│   ├── Author Biography
+│   ├── References (36 IEEE-format citations)
+│   └── Proper academic formatting
+│
+└── Formatting Standards
+    ├── Times New Roman font throughout
+    ├── 1.15 line spacing (JUTIF standard)
+    ├── Proper margins (2.5cm)
+    ├── Automatic page breaks
+    ├── Numbered citations
+    └── Professional journal layout
+
+USE CASE: ✓ International journal submission
+          ✓ Academic conference publication
+          ✓ Comprehensive research documentation
+          ✓ Professional portfolio
+          ✓ Advanced academic evaluation
+          ✓ Publication-quality document
+
+ADVANTAGES:
+  • International standard format
+  • 36 comprehensive references (academic credibility)
+  • Bilingual abstrak (English + Indonesian)
+  • Extensive literature review
+  • JUTIF-compliant formatting
+  • Journal-ready document
+  • Professional publication quality
+  • Comprehensive discussion section
+  • Detailed methodology explanation
+  • Feature analysis and interpretation
+
+KEY DIFFERENCES FROM OPTION 1:
+  • 5x+ more references (36 vs 5)
+  • International journal formatting (JUTIF)
+  • Longer, more comprehensive sections
+  • English as primary language
+  • Professional publication standard
+  • Bilingual abstract and content mix
+  • Author biography section
+  • Publication date tracking
+
+================================================================================
+RECOMMENDED USAGE MATRIX
+================================================================================
+
+USE CASE                          | RECOMMENDED FILE
+==================================|===================================
+Universitas Pamulang UAS          | report.docx (Option 1)
+Mentari platform submission       | report.docx (Option 1)
+Course evaluation                 | report.docx (Option 1)
+Quick academic report             | report.docx (Option 1)
+International journal submission  | journal_report_complete.docx (Option 2)
+Academic conference               | journal_report_complete.docx (Option 2)
+Professional portfolio            | journal_report_complete.docx (Option 2)
+Research publication              | journal_report_complete.docx (Option 2)
+Portfolio/CV submission           | journal_report_complete.docx (Option 2)
+Professional recognition          | journal_report_complete.docx (Option 2)
+
+================================================================================
+SUBMISSION GUIDELINES BY OPTION
+================================================================================
+
+OPTION 1 - Simple Report (for Mentari):
+1. File: output/report.docx
+2. Size: 360.5 KB (easily uploadable)
+3. Steps:
+   - Open Mentari.univ-pamulang.ac.id
+   - Login with student credentials
+   - Go to UAS ACV S2 session
+   - Click "Submit Paper"
+   - Upload report.docx
+   - Confirm submission
+4. Deadline: Before UAS session ends
+5. Format: Word document (.docx)
+
+OPTION 2 - Journal Article (for publication/professional use):
+1. File: output/journal_report_complete.docx
+2. Size: 367.9 KB
+3. Submission to journals:
+   - JUSTIFY (Journal Teknologi Informasi UPN Veteran Jakarta)
+   - JUTIF (Journal Universitas Terbuka)
+   - Other international IEEE-format journals
+4. Format requirements MET:
+   ✓ English title and abstract
+   ✓ Double abstract (English + Indonesian)
+   ✓ Keywords provided
+   ✓ Comprehensive introduction
+   ✓ Detailed methodology
+   ✓ Complete results with figures
+   ✓ Discussion section
+   ✓ Conclusion
+   ✓ 36+ references in IEEE format
+   ✓ Author biography
+   ✓ Times New Roman font
+   ✓ 1.15 line spacing
+   ✓ Proper margins
+
+================================================================================
+CONTENT COMPARISON TABLE
+================================================================================
+
+ASPECT                    | OPTION 1 (Simple)      | OPTION 2 (Journal)
+==========================|======================= |========================
+File size                 | 360.5 KB               | 367.9 KB
+References                | 5                      | 36
+Abstract                  | Indonesian only        | English + Indonesian
+Introduction paragraphs   | Short                  | 5 comprehensive
+Methodology subsections   | Basic                  | A-D detailed
+Discussion subsections    | Minimal                | 5 major subsections
+Language focus            | Indonesian primary     | English primary
+Journal formatting        | Basic academic         | JUTIF standard
+Author biography          | Not included           | Included
+Line spacing             | Normal                 | 1.15 (JUTIF)
+Font                     | Calibri/Times          | Times New Roman
+Tables included          | 3 main                 | 3 comprehensive
+Figures included         | 3 PNG                  | 3 PNG with discussions
+Publication-ready        | No                     | Yes
+Suitable for journals    | No                     | Yes
+Time to generate         | Fast                   | Slightly longer
+
+================================================================================
+SUBMISSION CHECKLIST
+================================================================================
+
+BEFORE UPLOADING OPTION 1 (Simple Report):
+☐ Open report.docx in Microsoft Word
+☐ Verify all sections present
+☐ Check images are displaying
+☐ Verify author name: Diki Rustian
+☐ Verify institution: Universitas Pamulang
+☐ Confirm email: diki.rstn@gmail.com
+☐ Review metrics accuracy
+☐ Check for spelling/grammar
+☐ Ensure file is not corrupted
+☐ Keep backup copy
+
+BEFORE SUBMITTING OPTION 2 (Journal Article):
+☐ Open journal_report_complete.docx
+☐ Verify bilingual abstracts
+☐ Check all 36 references are present
+☐ Verify figure captions and discussions
+☐ Confirm professional formatting
+☐ Review author biography
+☐ Check publication dates are appropriate
+☐ Verify all sections (I-V) present
+☐ Ensure Times New Roman throughout
+☐ Confirm 1.15 line spacing
+☐ Keep backup copy
+☐ Review target journal guidelines
+
+================================================================================
+BOTH FILES ARE READY FOR USE
+================================================================================
+
+✓ Option 1 (report.docx) - READY FOR MENTARI SUBMISSION
+✓ Option 2 (journal_report_complete.docx) - READY FOR JOURNAL SUBMISSION
+
+CHOOSE BASED ON YOUR NEEDS:
+• For course/institutional: Use Option 1
+• For publication/professional: Use Option 2
+
+Both files contain:
+✓ Accurate model results (real data)
+✓ Professional formatting
+✓ All 3 visualizations embedded
+✓ Comprehensive content
+✓ Proper citations
+✓ Author information
+
+NEXT STEPS:
+1. Decide which format matches your needs
+2. Download the corresponding file
+3. Review contents
+4. Make any minor adjustments if needed
+5. Submit to appropriate platform/journal
+
+================================================================================
+FILE LOCATIONS
+================================================================================
+
+OPTION 1: C:\Users\USER\Documents\GitHub\CV_Unpam\output\report.docx
+OPTION 2: C:\Users\USER\Documents\GitHub\CV_Unpam\output\journal_report_complete.docx
+
+SUPPORTING FILES:
+- Visualizations: C:\Users\USER\Documents\GitHub\CV_Unpam\output\report\
+- Models: C:\Users\USER\Documents\GitHub\CV_Unpam\output\models\
+- Results: C:\Users\USER\Documents\GitHub\CV_Unpam\output\evaluation_results.json
+
+GENERATOR SCRIPTS:
+- Option 1: C:\Users\USER\Documents\GitHub\CV_Unpam\generate_report.py
+- Option 2: C:\Users\USER\Documents\GitHub\CV_Unpam\generate_report_jutif.py
+
+================================================================================
+QUESTIONS & ANSWERS
+================================================================================
+
+Q: Which file should I submit to Mentari?
+A: Use Option 1 (report.docx). It's specifically formatted for course submission
+   and is lighter in size while containing all necessary content.
+
+Q: Can I submit Option 2 to Mentari instead?
+A: Yes, both are valid. Option 2 is just more comprehensive for professional
+   publication. Option 1 is more straightforward for course evaluation.
+
+Q: Are both files complete and ready to submit?
+A: Yes, both are 100% complete and ready for immediate submission. No edits
+   needed unless you have specific requirements.
+
+Q: Do the results in the files match the actual model performance?
+A: Yes, all metrics, numbers, and visualizations are from actual model training.
+   No placeholder or fake data.
+
+Q: Can I edit these files?
+A: Yes, both are standard Word documents. You can edit author name, institution,
+   email, or any content as needed.
+
+Q: Which format is more professional?
+A: Option 2 follows international journal standards (JUTIF) and is more
+   suitable for publication. Option 1 is standard academic format.
+
+Q: How many pages is each document?
+A: Option 1: ~8-10 pages, Option 2: ~12-15 pages depending on display settings.
+
+Q: Are the references properly formatted?
+A: Option 1: 5 references, Option 2: 36 references in IEEE format.
+   Both are properly cited.
+
+================================================================================
+GENERATED: 3 January 2026, 11:28 PM
+STATUS: BOTH OPTIONS COMPLETE AND READY FOR SUBMISSION
+================================================================================

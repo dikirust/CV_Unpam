@@ -1,0 +1,44 @@
+QUICK SUBMISSION GUIDE
+======================
+
+FILE TO SUBMIT:
+→ output/report.docx
+
+SIZE: 360 KB
+FORMAT: Microsoft Word (.docx)
+READY: ✓ YES
+
+CONTENTS:
+✓ Judul / Title
+✓ Abstrak / Abstract  
+✓ Pendahuluan / Introduction
+✓ Metodologi / Methodology
+✓ Hasil dan Diskusi / Results & Discussion
+✓ Kesimpulan / Conclusion
+✓ Daftar Pustaka / References
+✓ 3 Embedded PNG Images (visualizations)
+
+LANGUAGE: Indonesian text + English technical terms
+
+SUBMISSION STEPS:
+1. Open report.docx to verify content
+2. Go to Mentari → UAS Session
+3. Click Upload/Submit Paper
+4. Select output/report.docx
+5. Click Confirm/Submit
+6. Note timestamp
+
+ALTERNATIVE (if needed):
+- HTML version: output/report.html (for web preview)
+- Open report.html in any web browser to view
+
+AUTHOR INFO:
+Name: Diki Rustian
+Email: diki.rstn@gmail.com
+Institution: Universitas Pamulang, Indonesia
+
+Created: 3 January 2026
+Verified: ✓ All sections complete
+Status: ✓ READY FOR SUBMISSION
+
+======================

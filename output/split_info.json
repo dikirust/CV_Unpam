@@ -1,0 +1,17 @@
+{
+  "total_samples": 8400,
+  "train_samples": 5880,
+  "val_samples": 1260,
+  "test_samples": 1260,
+  "class_names": [
+    "foodwaste",
+    "glass",
+    "metal",
+    "paper",
+    "plastic"
+  ],
+  "num_classes": 5,
+  "image_size": 64,
+  "batch_size": 16,
+  "epochs": 50
+}

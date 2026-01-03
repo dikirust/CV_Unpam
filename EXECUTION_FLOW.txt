@@ -1,0 +1,242 @@
+"""
+DIAGRAM ALUR EKSEKUSI WASTE CLASSIFICATION PROJECT
+===================================================
+"""
+
+ALUR EKSEKUSI LENGKAP:
+=======================
+
+┌─────────────────────────────────────────────────────────────────┐
+│ STEP 1: LOAD DATA                                               │
+├─────────────────────────────────────────────────────────────────┤
+│ Input:  datasets/train/{5 class folders}                        │
+│ Process:                                                         │
+│  • Load semua .jpg files                                         │
+│  • Resize ke 64x64                                               │
+│  • Normalisasi (0-255 -> 0-1)                                    │
+│  • Split: 70% train, 15% val, 15% test                          │
+│ Output: X_train, X_val, X_test + y_train, y_val, y_test         │
+│         JSON: split_info.json                                    │
+│         Total samples: ~1000-5000 (depends on dataset)           │
+└─────────────────────────────────────────────────────────────────┘
+                              │
+                              ▼
+┌─────────────────────────────────────────────────────────────────┐
+│ STEP 2: BUILD ARCHITECTURE #1 - CUSTOM CNN                      │
+├─────────────────────────────────────────────────────────────────┤
+│ Input Shape: (64, 64, 3)                                         │
+│ Architecture:                                                    │
+│  • Conv2D(32, 3x3) -> BatchNorm -> MaxPool(2x2) -> Dropout(0.2) │
+│  • Conv2D(64, 3x3) -> BatchNorm -> MaxPool(2x2) -> Dropout(0.2) │
+│  • Conv2D(128, 3x3) -> BatchNorm -> MaxPool(2x2) -> Dropout(0.2)│
+│  • GlobalAveragePooling                                          │
+│  • Dense(256) -> BatchNorm -> Dropout(0.3)                      │
+│  • Dense(128) -> BatchNorm -> Dropout(0.3)                      │
+│  • Dense(5, softmax)                                             │
+│ Parameters: ~310,000                                             │
+│ Optimizer: Adam(lr=0.001)                                        │
+└─────────────────────────────────────────────────────────────────┘
+                              │
+                              ▼
+┌─────────────────────────────────────────────────────────────────┐
+│ STEP 3: BUILD ARCHITECTURE #2 - MOBILENETV2                     │
+├─────────────────────────────────────────────────────────────────┤
+│ Input Shape: (64, 64, 3)                                         │
+│ Architecture:                                                    │
+│  • MobileNetV2 base (pretrained, frozen)                         │
+│  • GlobalAveragePooling                                          │
+│  • Dense(256) -> BatchNorm -> Dropout(0.3)                      │
+│  • Dense(128) -> BatchNorm -> Dropout(0.3)                      │
+│  • Dense(5, softmax)                                             │
+│ Parameters: ~2,500,000 (tapi efisien dengan depthwise separable) │
+│ Type: Transfer learning dari ImageNet                            │
+│ Optimizer: Adam(lr=0.001)                                        │
+└─────────────────────────────────────────────────────────────────┘
+                              │
+                              ▼
+┌──────────────────────────────────────────────────────────────────┐
+│ STEP 4: TRAIN CUSTOM CNN                                         │
+├──────────────────────────────────────────────────────────────────┤
+│ Input: X_train, y_train, X_val, y_val                            │
+│ Config:                                                          │
+│  • Epochs: 50                                                    │
+│  • Batch size: 16                                                │
+│  • Loss: Sparse Categorical Crossentropy                         │
+│  • Callbacks:                                                    │
+│    - EarlyStopping (patience=10)                                 │
+│    - ReduceLROnPlateau (factor=0.5, patience=5)                  │
+│ Output:                                                          │
+│  • history_custom_cnn.pkl                                        │
+│  • training_info.json (partial)                                  │
+│  • Training curves data                                          │
+│ Estimated time: 5-10 minutes                                     │
+└──────────────────────────────────────────────────────────────────┘
+                              │
+                              ▼
+┌──────────────────────────────────────────────────────────────────┐
+│ STEP 5: TRAIN MOBILENETV2                                        │
+├──────────────────────────────────────────────────────────────────┤
+│ Input: X_train, y_train, X_val, y_val                            │
+│ Config: (sama dengan Custom CNN)                                 │
+│ Output:                                                          │
+│  • history_mobilenetv2.pkl                                       │
+│  • training_info.json (update)                                   │
+│  • Training curves data                                          │
+│ Estimated time: 3-7 minutes                                      │
+└──────────────────────────────────────────────────────────────────┘
+                              │
+                              ▼
+┌──────────────────────────────────────────────────────────────────┐
+│ STEP 6: VISUALISASI TRAINING                                     │
+├──────────────────────────────────────────────────────────────────┤
+│ Generate PNG files:                                              │
+│  • 01_custom_cnn_training.png (accuracy & loss per epoch)        │
+│  • 02_mobilenetv2_training.png (accuracy & loss per epoch)       │
+│  • 03_training_comparison.png (2x2 comparison)                   │
+│ Lokasi: output/report/                                           │
+└──────────────────────────────────────────────────────────────────┘
+                              │
+                              ▼
+┌──────────────────────────────────────────────────────────────────┐
+│ STEP 7: EVALUATE CUSTOM CNN - TEST SET                           │
+├──────────────────────────────────────────────────────────────────┤
+│ Input: X_test, y_test                                            │
+│ Process:                                                         │
+│  • Predict X_test                                                │
+│  • Calculate metrics:                                            │
+│    - Accuracy, Precision, Recall, F1-Score (weighted)            │
+│    - Confusion Matrix                                            │
+│    - Per-class accuracy                                          │
+│    - Classification report                                       │
+│ Output: evaluation_results.json (partial)                        │
+│ Expected: Accuracy 75-90%                                        │
+└──────────────────────────────────────────────────────────────────┘
+                              │
+                              ▼
+┌──────────────────────────────────────────────────────────────────┐
+│ STEP 8: EVALUATE MOBILENETV2 - TEST SET                          │
+├──────────────────────────────────────────────────────────────────┤
+│ Input: X_test, y_test                                            │
+│ Process: (sama dengan Custom CNN)                                │
+│ Output: evaluation_results.json (update)                         │
+│ Expected: Accuracy 80-95% (transfer learning advantage)          │
+└──────────────────────────────────────────────────────────────────┘
+                              │
+                              ▼
+┌──────────────────────────────────────────────────────────────────┐
+│ STEP 9: VISUALISASI EVALUASI                                     │
+├──────────────────────────────────────────────────────────────────┤
+│ Generate PNG files:                                              │
+│  • 04_cm_custom_cnn.png (confusion matrix)                       │
+│  • 05_cm_mobilenetv2.png (confusion matrix)                      │
+│  • 06_metrics_comparison.png (accuracy, precision, recall, F1)   │
+│  • 07_per_class_accuracy.png (per-class comparison)              │
+│ Lokasi: output/report/                                           │
+└──────────────────────────────────────────────────────────────────┘
+                              │
+                              ▼
+┌──────────────────────────────────────────────────────────────────┐
+│ STEP 10: RINGKASAN PERBANDINGAN                                  │
+├──────────────────────────────────────────────────────────────────┤
+│ Generate PNG file:                                               │
+│  • 08_summary_comparison.png (4 metric summary)                  │
+│    - Accuracy comparison                                         │
+│    - Model parameters comparison                                 │
+│    - Training time comparison                                    │
+│    - F1-Score comparison                                         │
+│ Lokasi: output/report/                                           │
+└──────────────────────────────────────────────────────────────────┘
+                              │
+                              ▼
+┌──────────────────────────────────────────────────────────────────┐
+│ STEP 11: SAVE MODELS & DATA                                      │
+├──────────────────────────────────────────────────────────────────┤
+│ Save:                                                            │
+│  • output/models/custom_cnn.h5                                   │
+│  • output/models/mobilenetv2.h5                                  │
+│  • output/split_info.json                                        │
+│  • output/models_info.json                                       │
+│  • output/training_info.json                                     │
+│  • output/evaluation_results.json                                │
+│  • output/history_custom_cnn.pkl                                 │
+│  • output/history_mobilenetv2.pkl                                │
+└──────────────────────────────────────────────────────────────────┘
+                              │
+                              ▼
+                    PHASE 1 SELESAI!
+                              │
+                              ▼
+┌──────────────────────────────────────────────────────────────────┐
+│ PHASE 2: GENERATE REPORT (SEPARATE SCRIPT)                       │
+├──────────────────────────────────────────────────────────────────┤
+│ Script: generate_report.py                                       │
+│ Input:                                                           │
+│  • output/evaluation_results.json                                │
+│  • output/training_info.json                                     │
+│  • output/models_info.json                                       │
+│  • output/split_info.json                                        │
+│  • output/report/*.png (semua 8 images)                          │
+│ Process:                                                         │
+│  • Build HTML report (Indonesian, professional format)           │
+│  • Include all visualizations                                    │
+│  • Add text content (pendahuluan, metodologi, hasil, kesimpulan) │
+│  • Convert to DOCX format                                        │
+│ Output:                                                          │
+│  • output/report.html                                            │
+│  • output/report.docx                                            │
+└──────────────────────────────────────────────────────────────────┘
+
+PERBANDINGAN METRIK YANG AKAN DITAMPILKAN:
+==========================================
+
+Metrik:
+1. Accuracy       -> Berapa persen prediksi benar
+2. Precision      -> Dari prediksi positif, berapa yang benar
+3. Recall         -> Dari ground truth positif, berapa yang terdeteksi
+4. F1-Score       -> Harmonic mean precision dan recall
+5. Confusion Matrix -> Matrix prediksi vs ground truth
+6. Per-class Accuracy -> Accuracy untuk setiap class
+
+Model:
+1. Custom CNN     -> Custom architecture, training dari awal
+2. MobileNetV2    -> Transfer learning, lightweight
+
+Perbandingan:
+- Bar charts untuk setiap metrik
+- Heatmap confusion matrix
+- Training curves per epoch
+- Summary table dengan semua metrik
+
+EXPECTED OUTPUT EXAMPLE:
+=======================
+
+Metrics Comparison:
+                  Custom CNN    MobileNetV2    Perbedaan
+Accuracy          0.8234        0.8712         +4.78%
+Precision         0.8156        0.8645         +4.89%
+Recall            0.8234        0.8712         +4.78%
+F1-Score          0.8190        0.8678         +4.88%
+
+Model Parameters:
+Custom CNN:       310,405
+MobileNetV2:      2,539,205 (tapi lebih efisien)
+
+Training Time:
+Custom CNN:       7.5 minutes
+MobileNetV2:      5.2 minutes (faster convergence)
+
+Per-class Accuracy:
+                  Custom CNN    MobileNetV2
+foodwaste         0.82          0.88
+glass             0.81          0.87
+metal             0.84          0.89
+paper             0.83          0.86
+plastic           0.82          0.85
+
+KESIMPULAN:
+MobileNetV2 menunjukkan performa yang lebih baik dengan:
+- Accuracy lebih tinggi (~4-5%)
+- Training time lebih cepat
+- Better convergence dengan transfer learning
+- Cocok untuk deployment di mobile device
+"""

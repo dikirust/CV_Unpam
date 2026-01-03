@@ -1,0 +1,62 @@
+{
+  "custom_cnn": {
+    "accuracy": 0.9015873015873016,
+    "precision": 0.9053647920004395,
+    "recall": 0.9015873015873016,
+    "f1_score": 0.901430784258864,
+    "per_class": {
+      "foodwaste": {
+        "accuracy": 0.9726027397260274,
+        "samples": 146
+      },
+      "glass": {
+        "accuracy": 0.8461538461538461,
+        "samples": 143
+      },
+      "metal": {
+        "accuracy": 0.7976653696498055,
+        "samples": 257
+      },
+      "paper": {
+        "accuracy": 0.95,
+        "samples": 340
+      },
+      "plastic": {
+        "accuracy": 0.9224598930481284,
+        "samples": 374
+      }
+    }
+  },
+  "mobilenetv2": {
+    "accuracy": 0.9365079365079365,
+    "precision": 0.9370304811930418,
+    "recall": 0.9365079365079365,
+    "f1_score": 0.9366830672600639,
+    "per_class": {
+      "foodwaste": {
+        "accuracy": 0.9794520547945206,
+        "samples": 146
+      },
+      "glass": {
+        "accuracy": 0.8811188811188811,
+        "samples": 143
+      },
+      "metal": {
+        "accuracy": 0.9455252918287937,
+        "samples": 257
+      },
+      "paper": {
+        "accuracy": 0.9382352941176471,
+        "samples": 340
+      },
+      "plastic": {
+        "accuracy": 0.9331550802139037,
+        "samples": 374
+      }
+    }
+  },
+  "training_times": {
+    "custom_cnn": 4439.92762,
+    "mobilenetv2": 754.453308
+  }
+}
